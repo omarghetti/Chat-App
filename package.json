@@ -3,8 +3,10 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.13",
-    "socketio": "^1.0.0"
+    "socket.io": "^4.2.0",
+    "socket.io-client": "^4.2.0"
   },
+  "type": "module",
   "name": "chat-app",
   "version": "1.0.0",
   "description": "real time chat app for learning purposes",
@@ -22,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/omarghetti/Chat-App/issues"
   },
-  "homepage": "https://github.com/omarghetti/Chat-App#readme"
+  "homepage": "https://github.com/omarghetti/Chat-App#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6"
+  }
 }

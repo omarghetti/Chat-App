@@ -1,14 +1,31 @@
-const express = require('express')
-const path = require('path')
-const app = express()
+import express from 'express'
+import path from 'path'
+import { createServer } from 'http'
+import { Server } from 'socket.io'
 
-const port =process.env.PORT || 3000
-const publicDirectoryPath = path.join(__dirname, '../public')
+const app = express()
+const server = createServer(app)
+const io = new Server(server)
+
+const __dirname = path.resolve();
+const port = process.env.PORT || 4000
+const publicDirectoryPath = path.join(__dirname, '/public')
 
 
 app.use(express.static(publicDirectoryPath))
 
-app.listen(port , () => {
-    console.log(`listening on port ${port}!`)
+io.on("connection", (socket) => {
+    console.log('new websocket connection ready')
+    socket.emit('newUser','Welcome to the chat!')
+    socket.on('sendMessage', (message) => {
+        io.emit('message',message)
+    })
+
 })
 
+server.listen(port , () => {
+    console.log(`listening on port ${port}!`)
+    console.log(publicDirectoryPath)
+})
+
+export default server
