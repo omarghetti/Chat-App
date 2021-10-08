@@ -14,3 +14,14 @@ document.querySelector('#messageForm').addEventListener('submit', (e) => {
     let message = document.querySelector('input').value
     socket.emit('sendMessage',message)
 })
+
+document.querySelector('#sendLoc').addEventListener('click',()=>{
+    if('geolocation' in navigator){
+        navigator.geolocation.getCurrentPosition((position) => {
+            socket.emit('sendLocation', {
+                'latitude': position.coords.latitude,
+                'longitude': position.coords.longitude
+            })
+        })
+    }
+})
